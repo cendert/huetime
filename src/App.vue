@@ -1,7 +1,6 @@
 <template>
   <div id="app" v-bind:style="appStyle">
-    <!-- <HelloWorld msg="Hello Vue in CodeSandbox!" /> -->
-    <Clock v-bind:time="time" />
+    <Clock v-bind:colors="colors" v-bind:time="time"/>
   </div>
 </template>
 
@@ -15,8 +14,12 @@ export default {
     return {
       cursor: "auto",
       time: {},
-      timeout: () => {},
-      progress: 0,
+      timeout: () => {
+      },
+      progress: {
+        hours: 0,
+        minutes: 0
+      },
     };
   },
   components: {
@@ -25,15 +28,26 @@ export default {
   },
   computed: {
     appStyle: function () {
-      // console.log(`hsl(${this.progress} * 360, 100%, 50%)`);
       return {
-        backgroundColor: `hsl(
-          ${this.progress * 360},
-          ${this.toTriangle(this.progress) * 100}%,
-          50%)`,
         cursor: this.cursor,
       };
     },
+    colors: function () {
+      return {
+        hoursColor: `hsl(
+          ${this.progress.hours * 360},
+          ${this.toTriangle(this.progress.hours) * 100}%,
+          50%)`,
+        hoursGrayscale: `hsl(
+          0,
+          0%,
+          ${this.progress.hours * 360}%)`,
+        minutesColor: `hsl(
+          ${this.progress.minutes * 360},
+          ${this.toTriangle(this.progress.minutes) * 100}%,
+          50%)`,
+      }
+    }
   },
   methods: {
     showCursor() {
@@ -48,7 +62,7 @@ export default {
       const progressWithinThird = ((progress + 1 / 6) % (1 / 3)) * 3;
       const relativeProgress = 2 * progressWithinThird - 1;
       const formula = (relProgress) =>
-        1 - 0.5 * Math.sqrt(1 - relProgress * relProgress);
+          1 - 0.5 * Math.sqrt(1 - relProgress * relProgress);
       return formula(relativeProgress);
     },
     leftPad(str, len, ch) {
@@ -62,12 +76,15 @@ export default {
       return str;
     },
     getProgress(time) {
-      const { hours, minutes, seconds } = time;
+      const {hours, minutes, seconds} = time;
       const hoursPart = parseInt(hours, 10) * 3600;
       const minutesPart = parseInt(minutes, 10) * 60;
       const secondsPart = parseInt(seconds, 10);
       const max = 24 * 3600;
-      return (hoursPart + minutesPart + secondsPart) / max;
+      return {
+        hours: (hoursPart + minutesPart + secondsPart) / max,
+        minutes: (minutesPart / 3600)
+      };
     },
     setTime() {
       const date = new Date();
@@ -94,13 +111,14 @@ export default {
 body {
   color: rgba(0, 0, 0, 0.4);
   font-family: "Avenir", Helvetica, Arial, sans-serif;
-  font-size: 6vw;
+  font-size: 6vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
 
 #app {
+  background-color: #333;
   bottom: 0;
   display: grid;
   grid-template:
