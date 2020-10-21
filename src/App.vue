@@ -29,6 +29,7 @@ export default {
   computed: {
     appStyle: function () {
       return {
+        backgroundColor: this.colors.hoursGrayscale,
         cursor: this.cursor,
       };
     },
