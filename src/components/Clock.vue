@@ -34,6 +34,8 @@ export default {
   grid-area: clock;
   max-height: 100vh;
   max-width: 100vw;
+  height: 100vh;
+  width: 100vw;
 }
 
 .time-part {
