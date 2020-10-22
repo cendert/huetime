@@ -42,7 +42,7 @@ export default {
         hoursGrayscale: `hsl(
           0,
           0%,
-          ${this.progress.hours * 360}%)`,
+          ${Math.sin(Math.PI * this.progress.hours) * 100}%)`,
         minutesColor: `hsl(
           ${this.progress.minutes * 360},
           ${this.toTriangle(this.progress.minutes) * 100}%,
