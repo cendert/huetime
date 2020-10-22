@@ -6,7 +6,6 @@
 
 <script>
 import Clock from "./components/Clock";
-// import HelloWorld from "./components/HelloWorld";
 
 export default {
   name: "App",
@@ -24,7 +23,6 @@ export default {
   },
   components: {
     Clock,
-    // HelloWorld,
   },
   computed: {
     appStyle: function () {
@@ -68,7 +66,7 @@ export default {
     },
     leftPad(str, len, ch) {
       str = String(str);
-      var i = -1;
+      let i = -1;
       if (!ch && ch !== 0) ch = " ";
       len = len - str.length;
       while (++i < len) {
