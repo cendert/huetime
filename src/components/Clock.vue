@@ -28,10 +28,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@font-face {
-  font-family: 'Droid Sans Mono';
-  src: url('../../public/fonts/DroidSansMono.ttf')
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
 
 .clock {
   grid-area: clock;
@@ -41,7 +38,7 @@ export default {
 
 .time-part {
   fill: rgba(0, 0, 0, 0.4);
-  font-family: "Droid Sans Mono", "Avenir", Helvetica, Arial, sans-serif;
+  font-family: "Roboto Mono", monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-anchor: middle;
