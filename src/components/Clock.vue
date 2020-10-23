@@ -5,8 +5,8 @@
         <feDropShadow dx="0" dy="0" stdDeviation="2" v-bind:flood-color="colors.minutesColor"/>
       </filter>
     </defs>
-    <circle class="clock-circle" r="24" cx="32" cy="32" v-bind:fill="colors.hoursColor" style="filter:url(#shadow);"/>
-    <text class="time-part" x="32" y="32" font-size="8">
+    <circle class="clock-circle" r="24" cx="32" cy="32" v-bind:fill="colors.hoursColor" @click="click" style="filter:url(#shadow);"/>
+    <text class="time-part" v-bind:class="{'show-time-part' : showTimePart}" x="32" y="32" font-size="8">
       <tspan class="time-part-hours">{{time.hours || '00'}}</tspan>
       <tspan class="separator">:</tspan>
       <tspan class="time-part-minutes">{{time.minutes || '00'}}</tspan>
@@ -20,7 +20,9 @@
 export default {
   name: "Clock",
   props: {
+    click: Function,
     colors: Object,
+    showTimePart: Boolean,
     time: Object,
   },
 };
@@ -38,14 +40,25 @@ export default {
   width: 100vw;
 }
 
+.clock-circle {
+  cursor: pointer;
+}
+
+.show-time-part {
+  opacity: 0;
+}
+
 .time-part {
   fill: rgba(0, 0, 0, 0.4);
   font-family: "Roboto Mono", monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-anchor: middle;
+  transition: opacity 1s ease-out;
   dominant-baseline: central;
   font-weight: 700;
+  user-select: none;
+  pointer-events: none;
 }
 
 .separator {

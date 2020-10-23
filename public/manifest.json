@@ -1,0 +1,7 @@
+{
+  "name": "Hue Time",
+  "short_name": "HueTime",
+  "description": "A time based colored clock.",
+  "display": "fullscreen",
+  "scope": "/"
+}

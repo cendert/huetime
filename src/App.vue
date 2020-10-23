@@ -1,6 +1,6 @@
 <template>
   <div id="app" v-bind:style="appStyle">
-    <Clock v-bind:colors="colors" v-bind:time="time"/>
+    <Clock v-bind:colors="colors" v-bind:time="time" v-bind:click="e => toggleTimePart(e)" v-bind:showTimePart="showTimePart"/>
   </div>
 </template>
 
@@ -12,6 +12,7 @@ export default {
   data() {
     return {
       cursor: "auto",
+      showTimePart: true,
       time: {},
       timeout: () => {
       },
@@ -34,7 +35,7 @@ export default {
     colors: function () {
       return {
         hoursColor: `hsl(
-          ${this.progress.hours * 360},
+          ${this.progress.hours * 720},
           ${this.toTriangle(this.progress.hours) * 100}%,
           50%)`,
         hoursGrayscale: `hsl(
@@ -49,6 +50,10 @@ export default {
     }
   },
   methods: {
+    toggleTimePart(e) {
+      e.preventDefault()
+      this.showTimePart = !this.showTimePart;
+    },
     showCursor() {
       clearTimeout(this.timeout);
       this.cursor = "auto";
